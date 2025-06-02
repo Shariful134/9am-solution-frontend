@@ -7,6 +7,8 @@ import LoginPage from "../components/pages/auth/LoginPage";
 import UserLayout from "../layout/UserLayout";
 import UserDashBoardPage from "../components/modules/dashboard/UserDashboard";
 import ProtectedRoutes from "../layout/ProtectedRoutes";
+import ShopDetails from "../components/modules/shopDetails/ShopDetails";
+import { getSubdomain } from "../utils/getSubDomain";
 
 const router = createBrowserRouter([
   {
@@ -15,7 +17,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home></Home>,
+        element: getSubdomain() ? <ShopDetails /> : <Home />,
       },
       {
         path: "/register",
@@ -39,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "dashboard",
         element: <UserDashBoardPage />,
+      },
+      {
+        path: "*",
+        element: <ShopDetails />,
       },
     ],
   },

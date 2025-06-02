@@ -14,7 +14,7 @@ import {
 import { Input } from "../../ui/input";
 import { Button } from "../../ui/button";
 import { useLoginMutation } from "../../../redux/auth/authApi";
-import type { TResponse, TUser } from "../../../types/type";
+import type { TUser } from "../../../types/type";
 import { toast } from "sonner";
 import { useNavigate } from "react-router";
 import { Checkbox } from "../../ui/checkbox";
@@ -55,6 +55,8 @@ const Login = () => {
     try {
       const res = await addLogin(values).unwrap();
       console.log("res: ", res);
+      const token = res?.data?.accessToken;
+      document.cookie = `token=${token}; path=/; domain=localhost; SameSite=None; Secure`;
       const user = verifyToken(res?.data?.accessToken) as TUser;
       console.log(user.role);
       if (res?.success) {

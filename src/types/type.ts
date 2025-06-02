@@ -20,8 +20,18 @@ export type TResponse<T> = {
 };
 export type TUser = {
   _id?: any;
+  userName: string;
+  password: string;
+  shops?: string[];
+  exp: number;
+  iat: number;
+  role: "admin" | "user";
+};
+export type TCurrentUser = {
+  _id?: any;
   username: string;
   password: string;
+  shops?: string[];
   exp: number;
   iat: number;
   role: "admin" | "user";

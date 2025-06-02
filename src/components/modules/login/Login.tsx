@@ -14,13 +14,17 @@ import {
 import { Input } from "../../ui/input";
 import { Button } from "../../ui/button";
 import { useLoginMutation } from "../../../redux/auth/authApi";
-import type { TResponse } from "../../../types/type";
+import type { TResponse, TUser } from "../../../types/type";
 import { toast } from "sonner";
 import { useNavigate } from "react-router";
 import { Checkbox } from "../../ui/checkbox";
+import { useAppDispath } from "../../../redux/hooks";
+import { setUser } from "../../../redux/auth/authSlice";
+import { verifyToken } from "../../../utils/VerifyToken";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispath();
   const [addLogin] = useLoginMutation();
   const formSchema = z.object({
     username: z.string(),
@@ -31,7 +35,7 @@ const Login = () => {
         message:
           "Password must be at least 8 characters, contain at least one number, and one special character,",
       }),
-    remember: z.boolean().optional(),
+    rememberMe: z.boolean().optional(),
   });
   type FormValues = z.infer<typeof formSchema>;
 
@@ -40,22 +44,31 @@ const Login = () => {
     defaultValues: {
       username: "Alamin hasan",
       password: "Alamin!23",
-      remember: false,
+      rememberMe: false,
     },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values);
+
+    const toastId = toast.loading("Loggin in");
     try {
-      const res = (await addLogin(values)) as TResponse<any>;
-      if (res?.error) {
-        toast.error(res?.error?.data?.errorSources?.[0]?.message);
-        console.log(res?.error);
-      } else {
-        toast.success(res?.data?.message);
-        navigate("/login");
+      const res = await addLogin(values).unwrap();
+      console.log("res: ", res);
+      const user = verifyToken(res?.data?.accessToken) as TUser;
+      console.log(user.role);
+      if (res?.success) {
+        dispatch(setUser({ user: user, token: res?.data?.accessToken }));
+        toast.success(res?.message, { id: toastId, duration: 1000 });
+        navigate(`/${user.role}/dashboard`);
       }
-      console.log(res);
+      if (res?.error) {
+        toast.error(res?.error?.data?.errorSources?.[0]?.message, {
+          id: toastId,
+          duration: 1000,
+        });
+        console.log(res?.error);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -107,12 +120,12 @@ const Login = () => {
                 {/* =====================test=========== */}
                 <FormField
                   control={form.control}
-                  name="remember"
+                  name="rememberMe"
                   render={({ field }) => (
                     <FormItem className="flex items-center gap-3 space-y-0">
                       <FormControl>
                         <Checkbox
-                          id="remember"
+                          id="rememberMe"
                           checked={field.value}
                           onCheckedChange={(checked) =>
                             field.onChange(checked === true)
@@ -125,7 +138,7 @@ const Login = () => {
                     </FormItem>
                   )}
                 />
-                <Button type="submit">Register</Button>
+                <Button type="submit">Login</Button>
               </form>
             </Form>
           </div>

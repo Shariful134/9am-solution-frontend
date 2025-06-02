@@ -1,5 +1,9 @@
 import { Outlet } from "react-router-dom";
-import { SidebarInset, SidebarProvider } from "../components/ui/sidebar";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "../components/ui/sidebar";
 import { AppSidebar } from "../components/app-sidebar";
 
 const UserLayout = () => {
@@ -7,6 +11,7 @@ const UserLayout = () => {
     <SidebarProvider>
       <AppSidebar variant="inset" />
       <SidebarInset>
+        <SidebarTrigger />
         {/* <SiteHeader /> */}
         <div className="flex flex-1 flex-col">
           <div className="@container/main flex flex-1 flex-col gap-2">

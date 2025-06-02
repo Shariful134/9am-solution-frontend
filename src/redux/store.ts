@@ -16,7 +16,7 @@ import {
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 
 const authPersistConfig = {
-  key: "auth ",
+  key: "auth",
   storage,
 };
 

@@ -4,6 +4,10 @@ import Home from "../components/pages/Home";
 import RegisterPage from "../components/pages/auth/RegisterPage";
 import LoginPage from "../components/pages/auth/LoginPage";
 
+import UserLayout from "../layout/UserLayout";
+import UserDashBoardPage from "../components/modules/dashboard/UserDashboard";
+import ProtectedRoutes from "../layout/ProtectedRoutes";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -20,6 +24,21 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <LoginPage></LoginPage>,
+      },
+    ],
+  },
+  // User layout based routes
+  {
+    path: "/user",
+    element: (
+      <ProtectedRoutes role="user">
+        <UserLayout />
+      </ProtectedRoutes>
+    ),
+    children: [
+      {
+        path: "dashboard",
+        element: <UserDashBoardPage />,
       },
     ],
   },

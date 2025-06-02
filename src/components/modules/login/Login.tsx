@@ -18,7 +18,6 @@ import type { TResponse } from "../../../types/type";
 import { toast } from "sonner";
 import { useNavigate } from "react-router";
 import { Checkbox } from "../../ui/checkbox";
-import { Label } from "../../ui/label";
 
 const Login = () => {
   const navigate = useNavigate();

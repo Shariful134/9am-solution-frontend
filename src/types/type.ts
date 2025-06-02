@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type TError = {
   data: {
     message: string;
@@ -17,5 +18,12 @@ export type TResponse<T> = {
   success: boolean;
   message: string;
 };
-
+export type TUser = {
+  _id?: any;
+  username: string;
+  password: string;
+  exp: number;
+  iat: number;
+  role: "admin" | "user";
+};
 // export type TResponseRedux<T> = TResponse<T> & BaseQueryApi;

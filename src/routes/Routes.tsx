@@ -9,16 +9,21 @@ import UserDashBoardPage from "../components/modules/dashboard/UserDashboard";
 import ProtectedRoutes from "../layout/ProtectedRoutes";
 import ShopDetails from "../components/modules/shopDetails/ShopDetails";
 import { getSubdomain } from "../utils/getSubDomain";
+import ShopSubdomainWrapper from "../components/modules/shopSubdomainWrappe/ShopSubdomainWrappe";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
     children: [
+      // {
+      //   index: true,
+
+      //   element: getSubdomain() ? <ShopDetails /> : <Home />,
+      // },
       {
         index: true,
-
-        element: getSubdomain() ? <ShopDetails /> : <Home />,
+        element: <ShopSubdomainWrapper />,
       },
       {
         path: "/register",

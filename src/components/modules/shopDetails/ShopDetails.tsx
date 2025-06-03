@@ -7,12 +7,13 @@ import LoadingSpin from "../../../utils/LoadingSpin";
 import { useDispatch } from "react-redux";
 import type { TUser } from "../../../types/type";
 
-const ShopDetails = () => {
+const ShopDetails = ({ shopNamed }: { shopNamed: string | null }) => {
   const [loading, setLoading] = useState(true);
   const [shopName, setShopName] = useState<string | null>(null);
   const [authenticated, setAuthenticated] = useState(false);
   const token = useAppSelector(useCurrentToken);
   const dispatch = useDispatch();
+  console.log(shopName);
 
   const getCookie = (name: string) => {
     const value = `; ${document.cookie}`;
@@ -53,7 +54,7 @@ const ShopDetails = () => {
   }
 
   if (!authenticated) return <div>Unauthorized</div>;
-  return <div>This is {shopName} shop</div>;
+  return <div>This is {shopNamed} shop</div>;
 };
 
 export default ShopDetails;

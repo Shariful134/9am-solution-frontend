@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Bell, CreditCard, LogOut, UserRoundPen } from "lucide-react";
+import { CreditCard, LogOut, UserRoundPen } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import {
@@ -90,10 +90,6 @@ export function NavUser({ user }: { user: TCurrentUser }) {
                   </DropdownMenuItem>
                 );
               })}
-              <DropdownMenuItem>
-                <Bell />
-                Notifications
-              </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleLogOut}>

@@ -7,7 +7,7 @@ import LoadingSpin from "../../../utils/LoadingSpin";
 import { useDispatch } from "react-redux";
 import type { TUser } from "../../../types/type";
 
-const ShopDetails = ({ shopNamed }: { shopNamed: string }) => {
+const ShopDetails = () => {
   const [loading, setLoading] = useState(true);
   const [shopName, setShopName] = useState<string | null>(null);
   const [authenticated, setAuthenticated] = useState(false);
@@ -21,18 +21,6 @@ const ShopDetails = ({ shopNamed }: { shopNamed: string }) => {
   };
 
   useEffect(() => {
-    // const tokenFromCookie = getCookie("token");
-    // console.log("tokenFromCookie: ", tokenFromCookie);
-    // const subdomain = getSubdomain();
-    // setShopName(subdomain);
-
-    // if (!token && tokenFromCookie) {
-    //   const CurrentUser = verifyToken(tokenFromCookie as string) as TUser;
-    //   if (CurrentUser) {
-    //     dispatch(setUser({ user: CurrentUser, token: tokenFromCookie }));
-    //   }
-    // }
-
     const tokenFromCookie = getCookie("token");
     const subdomain = getSubdomain();
     setShopName(subdomain);
@@ -43,20 +31,6 @@ const ShopDetails = ({ shopNamed }: { shopNamed: string }) => {
         dispatch(setUser({ user: users, token: tokenFromCookie }));
       }
     }
-
-    // if (!token) {
-    //   setAuthenticated(false);
-    //   setLoading(false);
-    //   return;
-    // }
-
-    // const verified = verifyToken(token);
-    // if (verified) {
-    //   setAuthenticated(true);
-    // } else {
-    //   setAuthenticated(false);
-    // }
-    // setLoading(false);
   }, []);
   useEffect(() => {
     if (!token) return;
@@ -79,7 +53,7 @@ const ShopDetails = ({ shopNamed }: { shopNamed: string }) => {
   }
 
   if (!authenticated) return <div>Unauthorized</div>;
-  return <div>This is {shopNamed} shop</div>;
+  return <div>This is {shopName} shop</div>;
 };
 
 export default ShopDetails;

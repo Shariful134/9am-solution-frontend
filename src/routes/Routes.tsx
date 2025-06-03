@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import App from "../App";
-import Home from "../components/pages/Home";
+
 import RegisterPage from "../components/pages/auth/RegisterPage";
 import LoginPage from "../components/pages/auth/LoginPage";
 
@@ -8,7 +8,8 @@ import UserLayout from "../layout/UserLayout";
 import UserDashBoardPage from "../components/modules/dashboard/UserDashboard";
 import ProtectedRoutes from "../layout/ProtectedRoutes";
 import ShopDetails from "../components/modules/shopDetails/ShopDetails";
-import { getSubdomain } from "../utils/getSubDomain";
+// import { getSubdomain } from "../utils/getSubDomain";
+import ShopSubdomainWrapper from "../components/modules/shopSubdomainWrappe/ShopSubdomainWrappe";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: getSubdomain() ? <ShopDetails /> : <Home />,
+        element: <ShopSubdomainWrapper />,
       },
       {
         path: "/register",

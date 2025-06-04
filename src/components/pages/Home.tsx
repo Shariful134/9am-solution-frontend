@@ -1,4 +1,8 @@
+import { getSubdomain } from "../../utils/getSubDomain";
+
 const Home = () => {
+  const subdomain = getSubdomain();
+  console.log("subdomain:", subdomain);
   return (
     <div className="container mx-auto">
       <div className="flex justify-center items-center mt-5">

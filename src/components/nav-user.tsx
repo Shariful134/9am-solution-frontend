@@ -21,11 +21,25 @@ import { useAppDispath } from "../redux/hooks";
 import { useNavigate } from "react-router";
 import { logout } from "../redux/auth/authSlice";
 import type { TCurrentUser } from "../types/type";
+import { handleRedirectToShop } from "../utils/hanlderedirctotShop";
+
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
+import { Button } from "./ui/button";
 
 export function NavUser({ user }: { user: TCurrentUser }) {
   const { isMobile } = useSidebar();
   const dispatch = useAppDispath();
   const navigate = useNavigate();
+
   // handleLogout
   const handleLogOut = () => {
     dispatch(logout());
@@ -81,8 +95,8 @@ export function NavUser({ user }: { user: TCurrentUser }) {
                     key={index}
                     onClick={() => {
                       const cleanShop = shop.toLowerCase().replace(/\s+/g, "");
-
-                      window.location.href = `http://${cleanShop}.localhost:5173`;
+                      handleRedirectToShop(cleanShop);
+                      // window.location.href = `http://${cleanShop}.localhost:5173`;
                     }}
                   >
                     <CreditCard />
@@ -92,9 +106,35 @@ export function NavUser({ user }: { user: TCurrentUser }) {
               })}
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={handleLogOut}>
-              <LogOut />
-              Log out
+            <DropdownMenuItem asChild>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="w-full justify-start gap-2"
+                  >
+                    <LogOut size={16} />
+                    Log out
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[400px]">
+                  <DialogHeader>
+                    <DialogTitle>Confirm Logout</DialogTitle>
+                    <DialogDescription>
+                      Are you sure you want to log out? You’ll need to log in
+                      again to access your account.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <DialogFooter>
+                    <DialogClose asChild>
+                      <Button variant="secondary">Cancel</Button>
+                    </DialogClose>
+                    <Button variant="destructive" onClick={handleLogOut}>
+                      Yes, Log out
+                    </Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

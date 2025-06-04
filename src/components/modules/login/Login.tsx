@@ -60,6 +60,7 @@ const Login = () => {
       const user = verifyToken(res?.data?.accessToken) as TUser;
       console.log(user.role);
       if (res?.success) {
+        localStorage.setItem("accessToken", token);
         dispatch(setUser({ user: user, token: res?.data?.accessToken }));
         toast.success(res?.message, { id: toastId, duration: 1000 });
         navigate(`/${user.role}/dashboard`);

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../../../redux/hooks";
 import { setUser, useCurrentToken } from "../../../redux/auth/authSlice";
@@ -7,32 +8,35 @@ import LoadingSpin from "../../../utils/LoadingSpin";
 import { useDispatch } from "react-redux";
 import type { TUser } from "../../../types/type";
 
-const ShopDetails = ({ shopNamed }: { shopNamed: string | null }) => {
+const ShopDetails = () => {
   const [loading, setLoading] = useState(true);
   const [shopName, setShopName] = useState<string | null>(null);
   const [authenticated, setAuthenticated] = useState(false);
   const token = useAppSelector(useCurrentToken);
   const dispatch = useDispatch();
-  console.log(shopName);
-
-  const getCookie = (name: string) => {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop()?.split(";").shift();
-  };
+  const tokenFromRedux = useAppSelector(useCurrentToken);
 
   useEffect(() => {
-    const tokenFromCookie = getCookie("token");
     const subdomain = getSubdomain();
     setShopName(subdomain);
 
-    if (!token && tokenFromCookie) {
-      const users = verifyToken(tokenFromCookie as string) as TUser;
-      if (users) {
-        dispatch(setUser({ user: users, token: tokenFromCookie }));
+    const token = localStorage.getItem("accessToken") || tokenFromRedux;
+
+    if (token) {
+      const user = verifyToken(token) as TUser;
+      if (user) {
+        dispatch(setUser({ user, token }));
+        setAuthenticated(true);
+      } else {
+        setAuthenticated(false);
       }
+    } else {
+      setAuthenticated(false);
     }
-  }, []);
+
+    setLoading(false);
+  }, [tokenFromRedux]);
+
   useEffect(() => {
     if (!token) return;
 
@@ -53,8 +57,17 @@ const ShopDetails = ({ shopNamed }: { shopNamed: string | null }) => {
     );
   }
 
-  if (!authenticated) return <div>Unauthorized</div>;
-  return <div>This is {shopNamed} shop</div>;
+  if (!authenticated) {
+    return <div className="container mx-auto">Unauthorized</div>;
+  }
+
+  return (
+    <div className="container mx-auto">
+      <div className="flex justify-center items-center mt-5">
+        <h1 className="text-xl">This is {shopName} shop</h1>
+      </div>
+    </div>
+  );
 };
 
 export default ShopDetails;

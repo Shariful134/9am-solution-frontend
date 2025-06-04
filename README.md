@@ -66,11 +66,7 @@ Copy
 Edit
 cd client
 npm install
-2️⃣ Create .env File
-Create a .env file in client/ based on .env.example.
 
-Example .env
-env
 Copy
 Edit
 VITE_API_BASE_URL=http://localhost:5000/api/v1
@@ -81,11 +77,7 @@ Edit
 npm run dev
 If using subdomains on localhost, be sure to update your system's hosts file:
 
-🧠 Add to your hosts file:
-Copy
-Edit
-127.0.0.1 beautyhub.localhost
-127.0.0.1 grocerypoint.localhost
+
 🛡️ Tech Stack
 Technology	Description
 React	Frontend framework

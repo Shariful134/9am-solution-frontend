@@ -2,6 +2,7 @@
 This is the frontend of the MERN Stack Authentication & Authorization project. It includes user registration, login, profile dashboard, and dynamic subdomain-based shop dashboards — built with React, Vite, and Redux Toolkit.
 ---
 🌐 Live Demo :[https://frontend-alpha-red-90.vercel.app/]
+
 🌐 Live Demo :[https://backend-server-dusky-three.vercel.app/]
 
 Replace with your actual hosted URLs

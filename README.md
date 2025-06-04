@@ -1,55 +1,111 @@
-# React + TypeScript + Vite
+🚀 MERN Auth App – Frontend (React + Vite)
+This is the frontend of the MERN Stack Authentication & Authorization project. It includes user registration, login, profile dashboard, and dynamic subdomain-based shop dashboards — built with React, Vite, and Redux Toolkit.
+---
+🌐 Live Demo :[https://frontend-alpha-red-90.vercel.app/]
+🌐 Live Demo :[https://backend-server-dusky-three.vercel.app/]
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Replace with your actual hosted URLs
 
-Currently, two official plugins are available:
+✅ Features
+👤 User Authentication
+User Signup with:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Username
 
-## Expanding the ESLint configuration
+Password (min 8 chars, 1 number, 1 special character)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+3–4 unique shop names
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+Shop name validation: globally unique
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Login with "Remember Me" option
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+If checked: 7-day session
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
-"# 9am-solution-frontend" 
+Else: 30-minute session
+
+Session stored via HTTP-only cookies
+
+🧑‍💻 Dashboard (Profile Feature)
+Displays username and list of user’s shops
+
+Logout with confirmation popup
+
+Navigation sidebar with user avatar
+
+🏪 Dynamic Subdomain-based Shop Dashboard
+Clicking a shop opens:
+
+cpp
+Copy
+Edit
+http://<shopname>.localhost:5173
+Example:
+
+arduino
+Copy
+Edit
+http://beautyhub.localhost:5173
+Each subdomain shows:
+
+arduino
+Copy
+Edit
+"This is beautyhub shop"
+Cross-subdomain authentication via cookie & Redux token sync
+
+Spinner shown while verifying token on subdomains
+
+If token is invalid or missing: shows “Unauthorized”
+
+⚙️ Setup Instructions
+1️⃣ Install Dependencies
+bash
+Copy
+Edit
+cd client
+npm install
+2️⃣ Create .env File
+Create a .env file in client/ based on .env.example.
+
+Example .env
+env
+Copy
+Edit
+VITE_API_BASE_URL=http://localhost:5000/api/v1
+3️⃣ Run Development Server
+bash
+Copy
+Edit
+npm run dev
+If using subdomains on localhost, be sure to update your system's hosts file:
+
+🧠 Add to your hosts file:
+Copy
+Edit
+127.0.0.1 beautyhub.localhost
+127.0.0.1 grocerypoint.localhost
+🛡️ Tech Stack
+Technology	Description
+React	Frontend framework
+Vite	Build tool and dev server
+TypeScript	Strong typing
+Redux Toolkit	Global state management
+React Router	Routing and navigation
+JWT	Token-based auth
+HTTP-only Cookies	Secure token storage
+Lucide Icons	Icon components
+
+🧪 Testing
+Manual testing on different flows:
+
+Register with duplicate shop names: ❌ error shown
+
+Login/logout and open subdomain in new tab: ✅ token persists
+
+Expired token: 🔐 auto logout
+
+📂 Backend Repo
+🔗 Backend GitHub Repository
+
+

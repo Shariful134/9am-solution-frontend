@@ -5,6 +5,26 @@ This is the frontend of the MERN Stack Authentication & Authorization project. I
 
 🌐 Live Demo :[https://backend-server-dusky-three.vercel.app/]
 
+
+ ## Fronted Setup
+1.Install All dependencies:
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+# or
+bun install
+```
+3.Start the build your code:
+``` bash
+npm run build
+```
+4.Start the development Frontend:
+``bash
+npm run dev
+```
 Replace with your actual hosted URLs
 
 ✅ Features

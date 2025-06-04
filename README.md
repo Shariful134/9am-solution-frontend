@@ -22,7 +22,7 @@ bun install
 npm run build
 ```
 4.Start the development Frontend:
-``bash
+``` bash
 npm run dev
 ```
 Replace with your actual hosted URLs

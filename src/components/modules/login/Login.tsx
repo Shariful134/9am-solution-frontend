@@ -65,15 +65,15 @@ const Login = () => {
         toast.success(res?.message, { id: toastId, duration: 1000 });
         navigate(`/${user.role}/dashboard`);
       }
-      if (res?.error) {
-        toast.error(res?.error?.data?.errorSources?.[0]?.message, {
-          id: toastId,
-          duration: 1000,
-        });
-        console.log(res?.error);
-      }
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      console.log("Login error:", error);
+
+      const message =
+        error?.data?.errorSources?.[0]?.message ||
+        error?.data?.message ||
+        "Something went wrong";
+
+      toast.error(message, { id: toastId, duration: 2000 });
     }
   };
   return (

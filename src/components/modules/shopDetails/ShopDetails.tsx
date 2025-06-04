@@ -17,6 +17,14 @@ const ShopDetails = () => {
   const tokenFromRedux = useAppSelector(useCurrentToken);
 
   useEffect(() => {
+    // ==============
+    // const params = new URLSearchParams(window.location.search);
+    // const tokenFromUrl = params.get("token");
+
+    // if (tokenFromUrl) {
+    //   localStorage.setItem("accessToken", tokenFromUrl);
+    // }
+    // ==============
     const subdomain = getSubdomain();
     setShopName(subdomain);
 

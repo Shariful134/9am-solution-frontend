@@ -42,6 +42,7 @@ export function NavUser({ user }: { user: TCurrentUser }) {
 
   // handleLogout
   const handleLogOut = () => {
+    localStorage.removeItem("accessToken");
     dispatch(logout());
     navigate("/login");
   };

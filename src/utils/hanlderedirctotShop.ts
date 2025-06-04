@@ -11,6 +11,7 @@
 
 export const handleRedirectToShop = (shop: string) => {
   const token = localStorage.getItem("accessToken");
+
   const shopUrl = `http://${shop}.localhost:5173`;
   const shopWindow = window.open(shopUrl);
   const interval = setInterval(() => {
